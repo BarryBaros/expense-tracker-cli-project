@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String
 from sqlalchemy.orm import relationship
-from . import Base
+from .base import Base
 
 class Category(Base):
     __tablename__ = 'categories'
@@ -12,4 +12,3 @@ class Category(Base):
 
     def __repr__(self):
         return f"<Category(id={self.id}, name={self.name})>"
-    
