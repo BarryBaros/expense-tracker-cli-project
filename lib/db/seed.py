@@ -14,3 +14,13 @@ categories = [
     ]
 session.add_all(categories)
 session.commit()
+
+# Create expenses
+expenses = [
+    Expense(amount=10.5, category_id=1, date = '2024-07-01'),
+    Expense(amount=15.75, category_id=2, date = '2024-07-05'),
+    Expense(amount=20.0, category_id=3, date = '2024-07-08')
+]
+session.add_all(expenses)
+session.commit
+
