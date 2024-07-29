@@ -1,4 +1,7 @@
-import sqlite3
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy import create_engine
 
-CONN = sqlite3.connect('company.db')
-CURSOR = CONN.cursor()
+Base = declarative_base()
+engine = create_engine('sqlite:///expenses.db')
+Session = sessionmaker(bind=engine)
