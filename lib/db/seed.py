@@ -24,3 +24,13 @@ expenses = [
 session.add_all(expenses)
 session.commit
 
+# Create budgets
+budgets = [
+    Budget(amount=500.0, category_id = 1),
+    Budget(amount=300.0, category_id = 2),
+    Budget(amount=200.0, category_id = 3)
+]
+session.add_all(budgets)
+session.commit
+
+session.close()
