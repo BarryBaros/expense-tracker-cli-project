@@ -26,3 +26,16 @@ def add_category(name):
 def show_categories():
     list_categories()
 
+@cli.command()
+@click.option('--amount', prompt='Budget amount', type=float)
+@click.option('--category', prompt='Budget category')
+def add_budget(amount, category):
+    create_budget(amount, category)
+
+@cli.command()
+def show_budgets():
+    list_budgets()
+
+
+if __name__ == "__main__":
+    cli()
