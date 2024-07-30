@@ -12,3 +12,8 @@ def cli():
 @click.option('--date', prompt='Expense date (YYYY, MM, DD)')
 def add_expense(amount, category, date):
     create_expense(amount, category, date)
+
+@cli.command()
+def show_expenses():
+    list_expenses()
+
