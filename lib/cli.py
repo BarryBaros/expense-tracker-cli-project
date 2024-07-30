@@ -36,6 +36,10 @@ def add_budget(amount, category):
 def show_budgets():
     list_budgets()
 
-
+@cli.command()
+@click.option('--report_type', prompt='Report type (monthly/yearly)')
+def report(report_type):
+    generate_report(report_type)
+    
 if __name__ == "__main__":
     cli()
