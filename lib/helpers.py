@@ -102,3 +102,41 @@ def create_budget(amount, category_name):
     finally:
         session.close()
 
+# Function to list all budgets
+def list_budgets():
+    session = Session()
+    try:
+        budgets = session.query(Budget).all()
+
+        for budget in budgets:
+            print(budget)
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+    finally:
+        session.close()
+
+def generate_report(report_type):
+    session = Session()
+    try:
+        if report_type == 'monthly':
+
+            pass
+        
+        # Generate a yearly report
+        elif report_type == 'yearly':
+            # Add logic to generate yearly report
+            pass
+        
+        # Handle invalid report types
+        else:
+            print(f"Report type '{report_type}' is not valid.")
+    
+    # Catch any exceptions that occur during report generation
+    except Exception as e:
+        print(f"An error occurred: {e}")
+    
+    # Ensure the session is closed even if an error occurs
+    finally:
+        session.close()
