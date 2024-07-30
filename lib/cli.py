@@ -17,3 +17,12 @@ def add_expense(amount, category, date):
 def show_expenses():
     list_expenses()
 
+@cli.command()
+@click.option('--name', prompt='Category name')
+def add_category(name):
+    create_category(name)
+
+@cli.command()
+def show_categories():
+    list_categories()
+
