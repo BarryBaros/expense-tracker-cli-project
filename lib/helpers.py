@@ -27,5 +27,42 @@ def create_expense(amount, category_name, date_str):
         session.add(expense)
         session.commit()
         print(f"Expense of {amount} added to category {category_name} on {date_str}.")
+
+    except Exception as e:
+        print(f"An error occurred: {e}")
     
+    finally:
+        session.close()
+
+
+def list_expenses():
+    session = Session()
+    try:
+        expenses = session.query(Expense).all()
+
+        for expense in expenses:
+            print(expense)
     
+    # Catch any exceptions that occur during database operations
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+    finally:
+        session.close()
+
+# Function to create a new category
+def create_category(name):
+    session = Session()
+    try:
+        category = Category(name=name)
+        
+        session.add(category)
+        session.commit()
+        print(f"Category '{name}' created.")
+    
+    except Exception as e:
+        print(f"An error occurred: {e}")
+
+    finally:
+        session.close()
+
