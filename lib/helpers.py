@@ -19,3 +19,11 @@ def find_category_by_name():
     name = input("Enter category's name: ")
     category = session.query(Category).filter_by(name=name).first()
     print(category if category else "Cateogry not found.")
+
+def create_category():
+    name = input("Enter new category name: ")
+    Category = Category(name=name)
+    session.add(Category)
+    session.commit()
+    print("Category created succesfully!")
+
