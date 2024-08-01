@@ -7,7 +7,6 @@ Base = declarative_base()
 # Import all the models to register them with SQLAlchemy
 from .expense import Expense
 from .category import Category
-from .budget import Budget
 
 DATABASE_URL = "sqlite:///lib/db/expense.db"
 engine = create_engine(DATABASE_URL)
