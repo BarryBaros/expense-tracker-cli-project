@@ -22,10 +22,10 @@ def find_category_by_name():
 
 def create_category():
     name = input("Enter new category name: ")
-    Category = Category(name=name)
-    session.add(Category)
+    category = Category(name=name)
+    session.add(category)
     session.commit()
-    print("Category created succesfully!")
+    print("Category created successfully!")
 
 def update_category():
     category_id = int(input("Enter category's iD to update: "))
@@ -60,12 +60,12 @@ def find_expense_by_id():
 
 def create_expense():
     amount = float(input("Enter amount: "))
-    Category_id = int(input("Enter category's ID: "))
+    category_id = int(input("Enter category's ID: "))
     date = input("Enter date (YYYY-MM-DD): ")
-    expense = Expense(amount=amount, Category_id=Category_id, date=date)
+    expense = Expense(amount=amount, category_id=category_id, date=date)
     session.add(expense)
     session.commit()
-    print("Expense created succesfully")
+    print("Expense created successfully")
 
 def update_expense():
     expense_id = int(input("Enter expense ID to update: "))
@@ -87,8 +87,7 @@ def delete_expense():
     expense = session.query(Expense).filter_by(id=expense_id).first()
     if expense:
         session.delete(expense)
-        session.delete(expense)
         session.commit()
-        print("Expense deleted succesfully.")
+        print("Expense deleted successfully.")
     else:
         print("expense not found.")

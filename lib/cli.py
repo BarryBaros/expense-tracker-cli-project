@@ -1,7 +1,6 @@
 # lib/cli.py
 import click
-
-from helpers import (
+from lib.helpers import (
     exit_program,
     list_categories,
     find_category_by_name,
