@@ -1,142 +1,136 @@
-# lib/helpers.py
-from lib.models import Session, Expense, Category, Budget
+from lib.models import Session, Expense, Category
 from datetime import datetime
-
-def helper_1():
-    print("Performing useful function#1.")
 
 def exit_program():
     print("Goodbye!")
     exit()
 
-# Function to create a new expense
-def create_expense(amount, category_name, date_str):
-    session = Session()
-    try:
-        category = session.query(Category).filter_by(name=category_name).first()
-        if not category:
-            print(f"Category '{category_name}' does not exist.")
-            return
-        
-        expense = Expense(
-            amount=amount, 
-            category_id=category.id, 
-            date=datetime.strptime(date_str, '%Y-%m-%d').date()
-        )
-        
-        session.add(expense)
-        session.commit()
-        print(f"Expense of {amount} added to category {category_name} on {date_str}.")
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
-    
-    finally:
-        session.close()
-
-
 def list_expenses():
     session = Session()
-    try:
-        expenses = session.query(Expense).all()
+    expenses = session.query(Expense).all()
+    for expense in expenses:
+        print(expense)
+    session.close()
 
-        for expense in expenses:
-            print(expense)
-    
-    # Catch any exceptions that occur during database operations
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-    finally:
-        session.close()
-
-# Function to create a new category
-def create_category(name):
+def find_expense_by_id():
+    id = input("Enter expense ID: ")
     session = Session()
-    try:
-        category = Category(name=name)
-        
-        session.add(category)
+    expense = session.query(Expense).filter_by(id=id).first()
+    if expense:
+        print(expense)
+    else:
+        print(f"No expense found with ID {id}")
+    session.close()
+
+def create_expense():
+    amount = float(input("Enter amount: "))
+    category_name = input("Enter category name: ")
+    date = input("Enter date (YYYY-MM-DD): ")
+    session = Session()
+    category = session.query(Category).filter_by(name=category_name).first()
+    if category:
+        expense = Expense(amount=amount, category_id=category.id, date=datetime.strptime(date, '%Y-%m-%d').date())
+        session.add(expense)
         session.commit()
-        print(f"Category '{name}' created.")
-    
-    except Exception as e:
-        print(f"An error occurred: {e}")
+        print(f"Expense of {amount} created in category {category_name}.")
+    else:
+        print(f"No category found with name {category_name}")
+    session.close()
 
-    finally:
-        session.close()
+def update_expense():
+    id = input("Enter expense ID to update: ")
+    session = Session()
+    expense = session.query(Expense).filter_by(id=id).first()
+    if expense:
+        new_amount = float(input("Enter new amount: "))
+        expense.amount = new_amount
+        session.commit()
+        print(f"Expense ID {id} updated with new amount {new_amount}.")
+    else:
+        print(f"No expense found with ID {id}")
+    session.close()
 
-# Function to list all categories
+def delete_expense():
+    id = input("Enter expense ID to delete: ")
+    session = Session()
+    expense = session.query(Expense).filter_by(id=id).first()
+    if expense:
+        session.delete(expense)
+        session.commit()
+        print(f"Expense ID {id} deleted.")
+    else:
+        print(f"No expense found with ID {id}")
+    session.close()
+
 def list_categories():
     session = Session()
-    try:
-        categories = session.query(Category).all()
+    categories = session.query(Category).all()
+    for category in categories:
+        print(category)
+    session.close()
 
-        for category in categories:
-            print(category)
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-    finally:
-        session.close()
-
-def create_budget(amount, category_name):
+def find_category_by_name():
+    name = input("Enter category name: ")
     session = Session()
-    try:
-        category = session.query(Category).filter_by(name=category_name).first()
-        
-        if not category:
-            print(f"Category '{category_name}' does not exist.")
-            return
+    category = session.query(Category).filter_by(name=name).first()
+    if category:
+        print(category)
+    else:
+        print(f"No category found with name {name}")
+    session.close()
 
-        budget = Budget(amount=amount, category_id=category.id)
+def find_category_by_id():
+    id = input("Enter category ID: ")
+    session = Session()
+    category = session.query(Category).filter_by(id=id).first()
+    if category:
+        print(category)
+    else:
+        print(f"No category found with ID {id}")
+    session.close()
 
-        session.add(budget)
+def create_category():
+    name = input("Enter category name: ")
+    session = Session()
+    category = Category(name=name)
+    session.add(category)
+    session.commit()
+    print(f"Category '{name}' created.")
+    session.close()
+
+def update_category():
+    id = input("Enter category ID to update: ")
+    session = Session()
+    category = session.query(Category).filter_by(id=id).first()
+    if category:
+        new_name = input("Enter new category name: ")
+        category.name = new_name
         session.commit()
-        print(f"Budget of {amount} set for category {category_name}.")
+        print(f"Category ID {id} updated to new name '{new_name}'.")
+    else:
+        print(f"No category found with ID {id}")
+    session.close()
 
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-    finally:
-        session.close()
-
-# Function to list all budgets
-def list_budgets():
+def delete_category():
+    id = input("Enter category ID to delete: ")
     session = Session()
-    try:
-        budgets = session.query(Budget).all()
+    category = session.query(Category).filter_by(id=id).first()
+    if category:
+        session.delete(category)
+        session.commit()
+        print(f"Category ID {id} deleted.")
+    else:
+        print(f"No category found with ID {id}")
+    session.close()
 
-        for budget in budgets:
-            print(budget)
-
-    except Exception as e:
-        print(f"An error occurred: {e}")
-
-    finally:
-        session.close()
-
-def generate_report(report_type):
+def list_category_expenses():
+    category_name = input("Enter category name: ")
     session = Session()
-    try:
-        if report_type == 'monthly':
-
-            pass
-        
-        # Generate a yearly report
-        elif report_type == 'yearly':
-            # Add logic to generate yearly report
-            pass
-        
-        # Handle invalid report types
-        else:
-            print(f"Report type '{report_type}' is not valid.")
-    
-    # Catch any exceptions that occur during report generation
-    except Exception as e:
-        print(f"An error occurred: {e}")
-    
-    # Ensure the session is closed even if an error occurs
-    finally:
-        session.close()
+    category = session.query(Category).filter_by(name=category_name).first()
+    if category:
+        expenses = session.query(Expense).filter_by(category_id=category.id).all()
+        for expense in expenses:
+            print(expense)
+    else:
+        print(f"No category found with name {category_name}")
+    session.close()
