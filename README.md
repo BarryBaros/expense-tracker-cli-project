@@ -83,7 +83,3 @@ python lib/cli.py update-expense <id> <amount> <category_id> <date>
 
 Delete an expense:
 python lib/cli.py delete-expense <id>
-
-
-License
-This project is licensed under the MIT License - see the LICENSE file for details.
