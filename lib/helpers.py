@@ -10,4 +10,7 @@ def exit_program():
     print("Thank you for visiting!")
     exit()
 
-
+def list_categories():
+    categories = session.query(Category).all()
+    for category in categories:
+        print(category)
