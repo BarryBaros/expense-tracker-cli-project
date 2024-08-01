@@ -1,5 +1,7 @@
 import click
 from datetime import datetime
+from models import Category, Expense
+# from base import engine
 from lib.helpers import (
     list_categories as list_cats,
     find_category_by_name as find_cat_by_name,
