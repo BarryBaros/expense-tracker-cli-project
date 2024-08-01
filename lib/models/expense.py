@@ -15,4 +15,4 @@ class Expense(Base):
     category = relationship("Category", back_populates="expenses")
 
     def __repr__(self):
-        return f"<Expense(id={self.id}, amount={self.amount}, date=)"
+        return f"Expense(id={self.id}, amount={self.amount}, category_id={self.category_id}, date={self.date})"
