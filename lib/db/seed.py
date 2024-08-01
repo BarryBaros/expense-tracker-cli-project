@@ -32,7 +32,7 @@ try:
     categories = [
         "Food",
         "Transport",
-        "Utilities"
+        "House Bills"
     ]
 
     # Only add categories if they do not already exist
@@ -52,7 +52,7 @@ try:
     expenses = [
         (50.00, category_map["Food"], date(2023, 1, 1)),
         (30.00, category_map["Transport"], date(2023, 1, 2)),
-        (100.00, category_map["Utilities"], date(2023, 1, 3))
+        (100.00, category_map["House Bills"], date(2023, 1, 3))
     ]
 
     # Only add expenses if they do not already exist
