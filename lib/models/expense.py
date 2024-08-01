@@ -1,6 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Date
 from sqlalchemy.orm import relationship
-from . import Base
+from lib.models.base import Base
+from datetime import date
 
 # Define the Expense class to map the to table in the database
 class Expense(Base):
@@ -15,4 +16,5 @@ class Expense(Base):
     category = relationship("Category", back_populates="expenses")
 
     def __repr__(self):
-        return f"Expense(id={self.id}, amount={self.amount}, category_id={self.category_id}, date={self.date})"
+        return (f"<Expense(id={self.id}, amount={self.amount}, "
+                f"category_id={self.category_id}, date={self.date})>")
