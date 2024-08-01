@@ -81,3 +81,14 @@ def update_expense():
         print("Expense updated")
     else:
         print("Expense not found")
+
+def delete_expense():
+    expense_id = int(input("Enter expense's ID to delete: "))
+    expense = session.query(Expense).filter_by(id=expense_id).first()
+    if expense:
+        session.delete(expense)
+        session.delete(expense)
+        session.commit()
+        print("Expense deleted succesfully.")
+    else:
+        print("expense not found.")
