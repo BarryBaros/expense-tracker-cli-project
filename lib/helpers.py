@@ -67,3 +67,17 @@ def creat_expense():
     session.commit()
     print("Expense created succesfully")
 
+def update_expense():
+    expense_id = int(input("Enter expense ID to update: "))
+    amount = float(input("Enter new amount: "))
+    category_id = int(input("Enter new category ID: "))
+    date = input("Enter new date (YYYY-MM-DD): ")
+    expense = session.query(Expense).filter_by(id=expense_id).first()
+    if expense:
+        expense.amount = amount
+        expense.category_id = category_id
+        expense.date = date
+        session.commit()
+        print("Expense updated")
+    else:
+        print("Expense not found")
