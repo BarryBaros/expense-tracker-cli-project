@@ -47,3 +47,9 @@ def delete_category():
         print("Category deleted.")
     else:
         print("Category not found.")
+
+def list_expenses():
+    expenses = session.query(Expense).all()
+    for expense in expenses:
+        print(expense)
+
