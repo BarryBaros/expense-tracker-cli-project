@@ -14,3 +14,8 @@ def list_categories():
     categories = session.query(Category).all()
     for category in categories:
         print(category)
+
+def find_category_by_name():
+    name = input("Enter category's name: ")
+    category = session.query(Category).filter_by(name=name).first()
+    print(category if category else "Cateogry not found.")
