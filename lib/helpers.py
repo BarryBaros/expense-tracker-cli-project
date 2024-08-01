@@ -38,3 +38,12 @@ def update_category():
     else:
         print("Categpry not found.")
 
+def delete_category():
+    category_id = int(input("Enter Category's ID to delete: "))
+    category = session.query(Category).filter_by(id=category_id).first()
+    if category:
+        session.delete(category)
+        session.commit()
+        print("Category deleted.")
+    else:
+        print("Category not found.")
