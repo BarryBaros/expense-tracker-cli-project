@@ -58,7 +58,7 @@ def find_expense_by_id():
     expense = session.query(Expense).filter_by(id=expense_id).first()
     print(expense if expense else "Expense not found.")
 
-def creat_expense():
+def create_expense():
     amount = float(input("Enter amount: "))
     Category_id = int(input("Enter category's ID: "))
     date = input("Enter date (YYYY-MM-DD): ")
