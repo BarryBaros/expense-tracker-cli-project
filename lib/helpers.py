@@ -27,3 +27,14 @@ def create_category():
     session.commit()
     print("Category created succesfully!")
 
+def update_category():
+    category_id = int(input("Enter category's iD to update: "))
+    name = input("Enter new category name: ")
+    category = session.query(Category).filter_by(id=category_id).first()
+    if category:
+        category.name = name
+        session.commit()
+        print("Category updated.")
+    else:
+        print("Categpry not found.")
+
