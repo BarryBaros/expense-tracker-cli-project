@@ -1,7 +1,7 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Date
 from sqlalchemy.orm import relationship
 from lib.models.base import Base
-from datetime import date
+from datetime import datetime
 
 # Define the Expense class to map the to table in the database
 class Expense(Base):

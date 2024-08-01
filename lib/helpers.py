@@ -7,7 +7,7 @@ Session = sessionmaker(bind=engine)
 session = Session()
 
 def exit_program():
-    print("Thank you for visiting!")
+    print("Thank you, goodbye!")
     exit()
 
 def list_categories():
@@ -58,29 +58,52 @@ def find_expense_by_id():
     expense = session.query(Expense).filter_by(id=expense_id).first()
     print(expense if expense else "Expense not found.")
 
+from datetime import datetime
+
 def create_expense():
     amount = float(input("Enter amount: "))
     category_id = int(input("Enter category's ID: "))
-    date = input("Enter date (YYYY-MM-DD): ")
+    date_str = input("Enter date (YYYY-MM-DD): ")
+    
+    # Convert the date string to a datetime.date object
+    try:
+        date = datetime.strptime(date_str, "%Y-%m-%d").date()
+    except ValueError:
+        print("Invalid date format. Please use YYYY-MM-DD.")
+        return
+    
     expense = Expense(amount=amount, category_id=category_id, date=date)
     session.add(expense)
     session.commit()
-    print("Expense created successfully")
+    print("Expense created successfully!")
+
+from datetime import datetime
 
 def update_expense():
     expense_id = int(input("Enter expense ID to update: "))
     amount = float(input("Enter new amount: "))
     category_id = int(input("Enter new category ID: "))
-    date = input("Enter new date (YYYY-MM-DD): ")
-    expense = session.query(Expense).filter_by(id=expense_id).first()
+    date_str = input("Enter new date (YYYY-MM-DD): ")
+    
+    #Convert the date string to a datetime.date object
+    try:
+        date = datetime.strptime(date_str, "%Y-%m-%d").date()
+    except ValueError:
+        print("Invalid date format. Please use YYYY-MM-DD.")
+        return
+    
+    #Fetch the expense record from the database
+    expense = session.query(Expense).filter(Expense.id == expense_id).first()
+    
     if expense:
         expense.amount = amount
         expense.category_id = category_id
         expense.date = date
         session.commit()
-        print("Expense updated")
+        print("Expense updated successfully!")
     else:
-        print("Expense not found")
+        print("Expense not found.")
+
 
 def delete_expense():
     expense_id = int(input("Enter expense's ID to delete: "))
