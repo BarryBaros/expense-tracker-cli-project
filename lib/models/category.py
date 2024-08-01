@@ -8,7 +8,8 @@ class Category(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False, unique=True)
 
-    expenses = relationship("Expense", back_populates="category")
+    # Use cascade="all, delete-orphan" to handle cascading deletes
+    expenses = relationship("Expense", back_populates="category", cascade="all, delete-orphan")
 
     def __repr__(self):
         return f"Category(id={self.id}, name='{self.name}')"
@@ -28,6 +29,7 @@ class Category(Base):
         if category:
             session.delete(category)
             session.commit()
+            print(f"Deleted category with ID {category_id}.")
         else:
             print(f"Category with ID {category_id} not found.")
 

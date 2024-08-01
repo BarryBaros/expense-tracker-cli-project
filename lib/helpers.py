@@ -1,6 +1,7 @@
 from sqlalchemy.orm import sessionmaker
-from lib.models import Category, Expense
 from lib.db.create_tables import engine
+from .models.category import Category
+from .models.expense import Expense
 
 # Create a new session
 Session = sessionmaker(bind=engine)
@@ -81,5 +82,5 @@ def delete_expense(id):
         print(f"No expense found with ID: {id}")
 
 def exit_program():
-    print("Goodbye!")
+    print("Thank you. Goodbye!")
     exit()
