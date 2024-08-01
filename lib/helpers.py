@@ -53,3 +53,7 @@ def list_expenses():
     for expense in expenses:
         print(expense)
 
+def find_expense_by_id():
+    expense_id = int(input("Enter expense's ID: "))
+    expense = session.query(Expense).filter_by(id=expense_id).first()
+    print(expense if expense else "Expense not found.")
