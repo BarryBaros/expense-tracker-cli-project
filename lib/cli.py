@@ -1,6 +1,6 @@
 # lib/cli.py
-import click
-from lib.helpers import (
+
+from helpers import (
     exit_program,
     list_categories,
     find_category_by_name,
@@ -13,6 +13,14 @@ from lib.helpers import (
     update_expense,
     delete_expense,
 )
+from lib.models import Category, Expense
+from sqlalchemy import create_engine
+from sqlalchemy.orm import sessionmaker
+
+# Setup database session
+engine = create_engine('sqlite:///expense_tracker.db')
+Session = sessionmaker(bind=engine)
+session = Session()
 
 def main():
     while True:
