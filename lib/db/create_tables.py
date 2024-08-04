@@ -16,4 +16,4 @@ engine = create_engine('sqlite:///expense_tracker.db')
 # Create tables
 Base.metadata.create_all(engine)
 
-print("Tables created successfully.")
+# print("Tables created successfully.")
