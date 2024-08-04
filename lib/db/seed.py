@@ -11,19 +11,18 @@ from lib.models.expense import Expense
 print("Current working directory:", os.getcwd())
 print("Python path:", sys.path)
 
-# Add the project's root directory to sys.path
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..')))
 
-# Create the database engine
+# Creating the database engine
 engine = create_engine('sqlite:///expense_tracker.db')
 
-# Drop all tables if they exist
+# Dropping all tables if they exist
 Base.metadata.drop_all(engine)
 
-# Create tables
+# Creating new tables after droping
 Base.metadata.create_all(engine)
 
-# Create a session
+# Creating a session
 Session = sessionmaker(bind=engine)
 session = Session()
 
@@ -35,7 +34,7 @@ try:
         "House Bills"
     ]
 
-    # Only add categories if they do not already exist
+    # If categories do not exist, add.
     existing_categories = session.query(Category).all()
     existing_category_names = {cat.name for cat in existing_categories}
 
@@ -48,7 +47,7 @@ try:
     categories = session.query(Category).all()
     category_map = {cat.name: cat.id for cat in categories}
 
-    # Seed expenses
+    # Seeding expenses
     expenses = [
         (50.00, category_map["Food"], date(2023, 1, 1)),
         (30.00, category_map["Transport"], date(2023, 1, 2)),
@@ -71,7 +70,6 @@ except Exception as e:
 finally:
     session.close()
 
-# Verification functions
 def print_all_categories():
     session = Session()
     try:
@@ -92,6 +90,6 @@ def print_all_expenses():
     finally:
         session.close()
 
-# Print the contents to verify
+# Print out the content
 print_all_categories()
 print_all_expenses()

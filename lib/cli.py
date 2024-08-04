@@ -84,5 +84,11 @@ def delete_expense(id):
     """Delete expense by ID"""
     delete_exp(id)
 
+@cli.command()
+def exit():
+    """Exit the CLI"""
+    click.echo("Thank you, goodbye!")
+    raise SystemExit(0)
+
 if __name__ == "__main__":
     cli()

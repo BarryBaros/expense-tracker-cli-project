@@ -4,7 +4,7 @@ from .models.category import Category
 from .models.expense import Expense
 from datetime import datetime
 
-# Create a new session
+# Creating a new session
 Session = sessionmaker(bind=engine)
 
 def list_categories():

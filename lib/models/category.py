@@ -8,7 +8,7 @@ class Category(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String, nullable=False, unique=True)
 
-    # Use cascade="all, delete-orphan" to handle cascading deletes
+    # cascade= all, and delete-orphan are used to handle cascading deletes
     expenses = relationship("Expense", back_populates="category", cascade="all, delete-orphan")
 
     def __repr__(self):
